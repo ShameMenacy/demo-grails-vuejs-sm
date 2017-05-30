@@ -15,17 +15,11 @@
 <br/>
 <div id="user-detail-data">
     <div class="row justify-content-start">
-        <div class="col-1">
-            姓
-        </div>
-        <div class="col-1">
-            名
-        </div>
+        <div class="col-1">姓</div>
+        <div class="col-1">名</div>
     </div>
     <div class="row justify-content-start">
-        <div class="col-2">
-            ------------------
-        </div>
+        <div class="col-2">------------------</div>
     </div>
     <div class="row justify-content-start" v-for="userData in userDetailDatas">
         <div class="col-1">
