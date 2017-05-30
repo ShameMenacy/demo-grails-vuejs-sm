@@ -15,13 +15,14 @@ class Mst_userController {
         respond Mst_user.list(params), model:[mst_userCount: Mst_user.count()]
     }
 
-    def listUser() {
-        def userList = Mst_user.mst_user_details.createCriteria().list {
+    def getUserList() {
+        def userList = Mst_user_detail.createCriteria().list {
             and {
                 lt('from_date', new Date())
                 ge('to_date', new Date())
             }
-        }> 0 ?: null
+            order("from_date", "asc")
+        }
         def result = [userList: userList]
         render result as JSON
     }

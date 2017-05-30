@@ -8,66 +8,22 @@
     </title>
 </head>
 <body>
-<div class="container">
-    <div class="row">
-        <h1>ログイン画面</h1>
-    </div>
-    <div class="row">
-        <div class="col align-self-center">
-            <!--<select id="user" class="btn dropdown-toggle">-->
-                <!--<option v-for="user in activeUserList" v-bind:value="user.id">-->
-                    <!--{{ userDetails.first_name }} {{ userDetails.last_name }}-->
-                <!--</option>-->
-            <!--</select>-->
-            <select id="user" class="btn dropdown-toggle">
-                <option v-for="user in userList" v-bind:value="user.id">
-                    {{ user.first_name }} {{ user.last_name }}
-                </option>
-            </select>
-            <button type="button" class="btn btn-outline-danger">選択
-            </button>
-            <button type="button" class="btn btn-outline-danger">ユーザー管理
-            </button>
-        </div>
+<div class="row">
+    <h1>ログイン画面</h1>
+</div>
+<div id="user-data">
+    <div class="row justify-content-md-center vertical-center-row">
+        <select class="btn btn-secondary dropdown-toggle">
+            <option value="0">ユーザー名を選択</option>
+            <option v-for="user in userList" v-bind:value="user.id">
+                {{ user.first_name }} {{ user.last_name }}
+            </option>
+        </select>
+        <g:link class="btn btn-outline-danger ml-2" controller="mst_project" action="index">選択
+        </g:link>
+        <g:link class="btn btn-outline-danger ml-2" controller="mst_user_detail" action="index">ユーザー管理
+        </g:link>
     </div>
 </div>
-<script>
-      <!--var userDetails = new Vue({-->
-        <!--el: '#user',-->
-          <!--data: {-->
-            <!--activeUserList: []-->
-          <!--},-->
-          <!--methods: {-->
-            <!--fetchData: function () {-->
-              <!--axios.get('/mst_user_detail/listActiveUser')-->
-              <!--.then(function (response) {-->
-                <!--user.activeUserList = response.data.activeUserList;-->
-              <!--})-->
-              <!--.catch(function (error) {-->
-                <!--console.log(error);-->
-              <!--});-->
-            <!--}-->
-          <!--},-->
-          <!--created: function () {-->
-            <!--this.fetchData();-->
-          <!--}-->
-      <!--});-->
-
-      var user = new Vue({
-        el: '#user',
-          data: {
-            userList: []
-          },
-          created: function () {
-              axios.get('/mst_user/listUser')
-              .then(function (response) {
-                user.userList = response.data.userList;
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
-          }
-      });
-    </script>
 </body>
 </html>

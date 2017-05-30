@@ -382,7 +382,7 @@ body, html {
 
 a {
     color: #db4800;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 a:hover {
