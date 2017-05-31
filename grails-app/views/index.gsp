@@ -1,22 +1,29 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
     <meta name="layout" content="main"/>
-    <title>Welcome to Grails</title>
-
-    <asset:link rel="icon" href="favicon.ico" type="image/x-ico"/>
+    <g:set var="entityName" value="${message(code: 'mst_user.label', default: 'Mst_user')}"/>
+    <title>
+        <g:message code="default.list.label" args="[entityName]"/>
+    </title>
 </head>
 <body>
-
-<h1>Welcome to Grails</h1>
-
-<p>
-    Congratulations, you have successfully started your first Grails application! At the moment
-    this is the default page, feel free to modify it to either redirect to a controller or display
-    whatever content you may choose. Below is a list of controllers that are currently deployed in
-    this application, click on each to execute its default action:
-</p>
-
-
+<div class="row">
+    <h1>ログイン画面</h1>
+</div>
+<div class="container" id="user-data">
+    <div class="row justify-content-center">
+        <select class="btn btn-secondary dropdown-toggle">
+            <option value="0">ユーザー名を選択</option>
+            <option v-for="user in userList" v-bind:value="user.id">
+                {{ user.first_name }} {{ user.last_name }}
+            </option>
+        </select>
+        <g:link class="btn btn-outline-danger ml-2" controller="mst_project" action="index">選択
+        </g:link>
+        <g:link class="btn btn-outline-danger ml-2" controller="mst_user" action="show">ユーザー管理
+        </g:link>
+    </div>
+</div>
 </body>
 </html>

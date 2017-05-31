@@ -5,7 +5,7 @@ var userData = new Vue({
     },
     methods: {
         fetchData: function () {
-            axios.get('/mst_user/getUserList')
+            axios.get('/mst_user/list')
             .then(function (response) {
                 userData.userList = response.data.userList;
             })

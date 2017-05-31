@@ -1,38 +1,34 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'mst_user.label', default: 'Mst_user')}" />
-        <title><g:message code="default.create.label" args="[entityName]" /></title>
-    </head>
-    <body>
-        <a href="#create-mst_user" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
-        <div id="create-mst_user" class="content scaffold-create" role="main">
-            <h1><g:message code="default.create.label" args="[entityName]" /></h1>
-            <g:if test="${flash.message}">
-            <div class="message" role="status">${flash.message}</div>
-            </g:if>
-            <g:hasErrors bean="${this.mst_user}">
-            <ul class="errors" role="alert">
-                <g:eachError bean="${this.mst_user}" var="error">
-                <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
-                </g:eachError>
-            </ul>
-            </g:hasErrors>
-            <g:form resource="${this.mst_user}" method="POST">
-                <fieldset class="form">
-                    <f:all bean="mst_user"/>
-                </fieldset>
-                <fieldset class="buttons">
-                    <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-                </fieldset>
-            </g:form>
-        </div>
-    </body>
+<head>
+    <meta name="layout" content="main"/>
+    <g:set var="entityName" value="${message(code: 'mst_user.label', default: 'Mst_user')}"/>
+    <title>
+        <g:message code="default.create.label" args="[entityName]"/>
+    </title>
+</head>
+<body>
+<g:form method="post">
+    <div class="row">
+        <h1>ユーザー編集画面</h1>
+    </div>
+    <div class="container" id="user-data">
+        <g:hiddenField name="id" value="${mst_user?.id}"/>
+        <g:hiddenField name="version" value="${mst_user?.version}"/>
+        <fieldset class="form">
+            <g:render template="form"/>
+        </fieldset>
+        <fieldset class="button">
+            <div class="row justify-content-md-center vertical-center-row">
+                <g:link class="btn btn-outline-danger ml-2" controller="mst_user" action="update">登録
+                </g:link>
+                <g:link class="btn btn-outline-danger ml-2" controller="mst_user" action="delete">削除
+                </g:link>
+                <g:link class="btn btn-outline-danger ml-2" controller="mst_user" action="show">戻る
+                </g:link>
+            </div>
+        </fieldset>
+    </div>
+</g:form>
+</body>
 </html>

@@ -1,31 +1,42 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'mst_user.label', default: 'Mst_user')}" />
-        <title><g:message code="default.show.label" args="[entityName]" /></title>
-    </head>
-    <body>
-        <a href="#show-mst_user" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-            </ul>
+<head>
+    <meta name="layout" content="main"/>
+    <g:set var="entityName" value="${message(code: 'mst_user_detail.label', default: 'Mst_user_detail')}"/>
+    <title>
+        <g:message code="default.list.label" args="[entityName]"/>
+    </title>
+</head>
+<body>
+
+<div class="row">
+    <h1>ユーザー管理画面</h1>
+</div>
+<br/>
+<div class="container" id="user-detail-data">
+    <div class="row justify-content-start">
+        <div class="col-1">姓</div>
+        <div class="col-1">名</div>
+    </div>
+    <div class="row justify-content-start" v-for="userData in userDetailDatas">
+        <div class="col-1">
+            <g:link controller="mst_user" action="view" id="{{ userData.id }}">{{ userData.first_name }}
+            </g:link>
         </div>
-        <div id="show-mst_user" class="content scaffold-show" role="main">
-            <h1><g:message code="default.show.label" args="[entityName]" /></h1>
-            <g:if test="${flash.message}">
-            <div class="message" role="status">${flash.message}</div>
-            </g:if>
-            <f:display bean="mst_user" />
-            <g:form resource="${this.mst_user}" method="DELETE">
-                <fieldset class="buttons">
-                    <g:link class="edit" action="edit" resource="${this.mst_user}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-                    <input class="delete" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-                </fieldset>
-            </g:form>
+        <div class="col-1">
+            <g:link controller="mst_user" action="view">{{ userData.last_name }}
+            </g:link>
         </div>
-    </body>
+    </div>
+</div>
+
+<div class="row justify-content-md-center vertical-center-row">
+    <div class="col-xs-6 col-centered col-fixed">
+        <g:link class="btn btn-outline-danger" controller="mst_user" action="create">新規登録
+        </g:link>
+        <g:link class="btn btn-outline-danger" controller="mst_user" action="index">戻る
+        </g:link>
+    </div>
+</div>
+</body>
 </html>

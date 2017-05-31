@@ -26,6 +26,8 @@ class Mst_user_detailController {
         render result as JSON
     }
 
+
+
     def show(Mst_user_detail mst_user_detail) {
         respond mst_user_detail
     }

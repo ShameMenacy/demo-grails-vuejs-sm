@@ -13,21 +13,19 @@
     <h1>ユーザー管理画面</h1>
 </div>
 <br/>
-<div id="user-detail-data">
+<div class="container" id="user-detail-data">
     <div class="row justify-content-start">
         <div class="col-1">姓</div>
         <div class="col-1">名</div>
     </div>
-    <div class="row justify-content-start">
-        <div class="col-2">------------------</div>
-    </div>
     <div class="row justify-content-start" v-for="userData in userDetailDatas">
         <div class="col-1">
-            <g:link controller="mst_project" action="index">
-            {{ userData.first_name }}</g:link>
+            <g:link controller="mst_project" action="create">{{ userData.first_name }}
+            </g:link>
         </div>
         <div class="col-1">
-            <g:link controller="mst_project" action="index">{{ userData.last_name }}</g:link>
+            <g:link controller="mst_project" action="create">{{ userData.last_name }}
+            </g:link>
         </div>
     </div>
 </div>

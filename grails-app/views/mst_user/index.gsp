@@ -11,8 +11,8 @@
 <div class="row">
     <h1>ログイン画面</h1>
 </div>
-<div id="user-data">
-    <div class="row justify-content-md-center vertical-center-row">
+<div class="container" id="user-data">
+    <div class="row justify-content-center">
         <select class="btn btn-secondary dropdown-toggle">
             <option value="0">ユーザー名を選択</option>
             <option v-for="user in userList" v-bind:value="user.id">
@@ -21,7 +21,7 @@
         </select>
         <g:link class="btn btn-outline-danger ml-2" controller="mst_project" action="index">選択
         </g:link>
-        <g:link class="btn btn-outline-danger ml-2" controller="mst_user_detail" action="index">ユーザー管理
+        <g:link class="btn btn-outline-danger ml-2" controller="mst_user" action="show">ユーザー管理
         </g:link>
     </div>
 </div>
