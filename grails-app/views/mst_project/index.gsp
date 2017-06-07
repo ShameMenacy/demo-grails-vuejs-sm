@@ -1,28 +1,77 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'mst_project.label', default: 'Mst_project')}" />
-        <title><g:message code="default.list.label" args="[entityName]" /></title>
-    </head>
-    <body>
-        <a href="#list-mst_project" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-            </ul>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="layout" content="main"/>
+    <g:set var="entityName" value="${message(code: 'mst_project.label', default: 'Mst_project')}"/>
+    <title>
+        <g:message code="default.list.label" args="[entityName]"/>
+    </title>
+</head>
+<body>
+<div class="row">
+    <h1>プロジェクト選択画面</h1>
+</div>
+<div class="container" id="project-data">
+    <div class="row justify-content-center fieldcontain">
+        <div class="col-4">
+            <input v-model="project_name" placeholder="プロジェクト名を入力">
         </div>
-        <div id="list-mst_project" class="content scaffold-list" role="main">
-            <h1><g:message code="default.list.label" args="[entityName]" /></h1>
-            <g:if test="${flash.message}">
-                <div class="message" role="status">${flash.message}</div>
-            </g:if>
-            <f:table collection="${mst_projectList}" />
-
-            <div class="pagination">
-                <g:paginate total="${mst_projectCount ?: 0}" />
-            </div>
+        <div class="col-4">
+            <button class="btn btn-outline-danger ml-2" v-on:click="create" v-on:keyup.enter="create">新規作成</button>
         </div>
-    </body>
+    </div>
+    <div class="row justify-content-center fieldcontain">
+        <div class="col-4">
+            <select class="btn btn-secondary dropdown-toggle" v-model="projectId">
+                <option value="0" disabled>プロジェクト選択</option>
+                <option v-for="project in projectList" v-bind:value="project.id">
+                    {{ project.project_name }}
+                </option>
+            </select>
+        </div>
+        <div class="col-4">
+            <a class="btn btn-outline-danger ml-2" v-bind:href="'/mst_project/show/' + projectId">選択</a>
+            <button class="btn btn-outline-danger ml-2" @click="deleteProject">削除</button>
+        </div>
+    </div>
+</div>
+<script>
+    var projectData = new Vue({
+        el: '#project-data',
+        data: {
+            projectId: 0,
+            project_name: '',
+            projectList: []
+        },
+        methods: {
+            list: function () {
+                axios('/mst_project/list')
+                .then(function (response) {projectData.projectList = response.data.projectList;})
+                .catch(function (error) {console.log(error);});
+            },
+            create: function () {
+                axios.get('/mst_project/create', {
+                    params: {
+                        project_name: this.project_name
+                    }
+                })
+                .then(function (response) {projectData.projectList = response.data.projectList;projectData.project_name=''})
+                .catch(function (error) {console.log(error);});
+            },
+            deleteProject: function () {
+                axios.get('/mst_project/delete', {
+                    params: {
+                        id: this.projectId
+                    }
+                })
+                .then(function (response) {projectData.projectList = response.data.projectList;projectData.projectId=0})
+                .catch(function (error) {console.log(error);});
+            }
+        },
+        created: function () {
+            this.list();
+        }
+    })
+</script>
+</body>
 </html>
