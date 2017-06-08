@@ -6,12 +6,7 @@
     <title>
         <g:layoutTitle default="Grails"/>
     </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
-    <script src="https://unpkg.com/vue@2.3.3/dist/vue.js"></script>
-    <script src="https://unpkg.com/axios@0.16.1/dist/axios.min.js"></script>
-    <!--vuetable-2-->
-    <script src="https://unpkg.com/vuetable-2@1.6.0"></script>
+    <asset:javascript src="application.js"/>
     <asset:stylesheet src="application.css"/>
     <g:layoutHead/>
 </head>

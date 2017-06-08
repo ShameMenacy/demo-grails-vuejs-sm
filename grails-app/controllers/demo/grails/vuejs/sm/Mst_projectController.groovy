@@ -16,7 +16,7 @@ class Mst_projectController {
 
     def create() {
         new Mst_project(project_name: params?.project_name).save flush: true
-        list()
+        render status: OK
     }
 
     def show() {
@@ -30,8 +30,6 @@ class Mst_projectController {
             notFound()
             return
         }
-//        def result = [mst_project: mst_project]
-//        render result as JSON
         render(view: "/mst_project/show", model: [mstTask: mst_task as JSON])
     }
 
@@ -42,7 +40,7 @@ class Mst_projectController {
             return
         }
         mst_project.delete flush:true
-        list()
+        render status: OK
     }
 
     protected void notFound() {

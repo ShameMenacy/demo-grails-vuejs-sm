@@ -36,7 +36,7 @@
     </div>
 </div>
 <script>
-    var projectData = new Vue({
+    var vProject = new Vue({
         el: '#project-data',
         data: {
             projectId: 0,
@@ -44,32 +44,37 @@
             projectList: []
         },
         methods: {
-            list: function () {
+            loadData: function () {
                 axios('/mst_project/list')
-                .then(function (response) {projectData.projectList = response.data.projectList;})
+                .then(function (response) {vProject.projectList = response.data.projectList;})
                 .catch(function (error) {console.log(error);});
+            },
+            resetData: function () {
+                vProject.loadData();
+                vProject.project_name='';
+                vProject.projectId=0
             },
             create: function () {
                 axios.get('/mst_project/create', {
                     params: {
-                        project_name: this.project_name
+                        project_name: vProject.project_name
                     }
                 })
-                .then(function (response) {projectData.projectList = response.data.projectList;projectData.project_name=''})
+                .then(function (response) {vProject.resetData()})
                 .catch(function (error) {console.log(error);});
             },
             deleteProject: function () {
                 axios.get('/mst_project/delete', {
                     params: {
-                        id: this.projectId
+                        id: vProject.projectId
                     }
                 })
-                .then(function (response) {projectData.projectList = response.data.projectList;projectData.projectId=0})
+                .then(function (response) {vProject.resetData()})
                 .catch(function (error) {console.log(error);});
             }
         },
         created: function () {
-            this.list();
+            this.loadData();
         }
     })
 </script>
